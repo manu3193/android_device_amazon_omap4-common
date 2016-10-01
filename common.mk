@@ -69,7 +69,7 @@ ADDITIONAL_BUILD_PROPERTIES += \
 # Device settings
 ADDITIONAL_BUILD_PROPERTIES += \
     wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=120 \
+    wifi.supplicant_scan_interval=15 \
     ro.opengles.version=131072 \
     com.ti.omap_enhancement=true \
     omap.enhancement=true \
@@ -81,6 +81,11 @@ ADDITIONAL_BUILD_PROPERTIES += \
     media.stagefright.cache-params=18432/20480/15 \
     ro.ksm.default=1 \
     camera2.portability.force_api=1
+
+# Deeper Sleep / Better Battery Life
+ADDITIONAL_BUILD_PROPERTIES += \
+    ro.ril.disable.power.collapse=1 \
+    pm.sleep_mode=1
 
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
 

@@ -52,11 +52,20 @@ on boot
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
+    
+    #Hardware tunables
+    chown root system /sys/devices/platform/omapdss/manager0/cpr_coef
+    chown root system /sys/devices/platform/omapdss/manager0/cpr_enable
+    chmod 0664 /sys/devices/platform/omapdss/manager0/cpr_coef
+    chmod 0664 /sys/devices/platform/omapdss/manager0/cpr_enable
+    restorecon /sys/devices/platform/omapdss/manager0/cpr_coef
+    restorecon /sys/devices/platform/omapdss/manager0/cpr_enable
 
 service pvrsrvinit /system/bin/pvrsrvinit		
     class core		
     user root		
-    group root		
+    group root
+    seclabel u:r:pvrsrvinit:s0
     oneshot		
     disabled
  
@@ -85,4 +94,3 @@ service smc_pa /system/bin/smc_pa_ctrl \
 
 on property:init.svc.smc_pa=stopped
 	start tf_daemon
-
